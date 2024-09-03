@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { Suspense, useState } from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,10 +9,17 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import UserAvatar from '../common/UserAvatar'
+import dynamic from 'next/dynamic'
+const LogoutModal = dynamic(() => import("../auth/logoutModel"))
 
 
 export default function ProfileMenu({name, image}:{name:string, image?: string}) {
+    const [logoutOpen, setLogoutOpen] = useState(false);
     return (
+        <>
+        {logoutOpen && <Suspense fallback={<p>Loading...</p>}>
+        <LogoutModal open={logoutOpen} setOpen={setLogoutOpen} />
+        </Suspense>}
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <UserAvatar name={name} image={image}/>
@@ -21,9 +28,9 @@ export default function ProfileMenu({name, image}:{name:string, image?: string})
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLogoutOpen(true)}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-
+        </>
     )
 }

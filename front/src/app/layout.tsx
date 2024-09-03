@@ -3,7 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Inter as FontSans } from 'next/font/google'
 import SessionProvider from "@/providers/SessionProvider";
-
+import { Toaster } from "@/components/ui/sonner"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,7 +27,9 @@ export default function RootLayout({
       <body 
       className={cn(
         "min-h-screen bg-background font-sans antialiased",
-        fontSans.variable)}>{children}</body>
+        fontSans.variable)}>
+          <Toaster richColors duration={10000}/>
+          {children}</body>
         </SessionProvider>
     </html>
   );

@@ -15,7 +15,10 @@ import {signOut} from "next-auth/react"
 
 export default function logoutModel({open, setOpen}:{open: boolean, setOpen:Dispatch<SetStateAction<boolean>>}) {
     const handleLogout = () => {
-        signOut({})
+        signOut({
+            redirect: true,
+            callbackUrl:  '/'
+        })
     }
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
@@ -29,7 +32,7 @@ export default function logoutModel({open, setOpen}:{open: boolean, setOpen:Disp
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Continue</AlertDialogAction>
+                    <AlertDialogAction onClick={handleLogout}>Continue</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

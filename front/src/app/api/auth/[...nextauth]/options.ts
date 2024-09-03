@@ -10,22 +10,22 @@ export interface CustomSession {
 }
 
 export interface CustomUser {
-    id?: string|null
-    name?: string|null
-    email?: string|null
-    image?: string|null
-    provider?: string|null
-    token?: string|null
+    id?: string | null
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    provider?: string | null
+    token?: string | null
 }
 export const authOptions: AuthOptions = {
-    pages:{
+    pages: {
         signIn: "/"
     },
-    callbacks:{
-        async signIn({ user, account }: {user:CustomUser,account:Account|null}) {
+    callbacks: {
+        async signIn({ user, account }: { user: CustomUser, account: Account | null }) {
             try {
-                console.log("the user data is",user)
-                console.log("the account is",account)
+                console.log("the user data is", user)
+                console.log("the account is", account)
                 const payload = {
                     email: user.email,
                     name: user.name,
@@ -33,7 +33,7 @@ export const authOptions: AuthOptions = {
                     provider: account?.provider,
                     image: user?.image
                 }
-                const {data} = await axios.post(LOGIN_URL,payload)
+                const { data } = await axios.post(LOGIN_URL, payload)
                 user.id = data?.user?.id.toString()
                 user.token = data?.user?.token
                 user.provider = data?.user?.provider
@@ -41,30 +41,30 @@ export const authOptions: AuthOptions = {
             } catch (error) {
                 return false
             }
-          },
-        async session({ session, user, token }:{session: CustomSession, user: CustomUser, token:JWT}) {
-             session.user = token.user as CustomUser
-             return session
+        },
+        async session({ session, user, token }: { session: CustomSession, user: CustomUser, token: JWT }) {
+            session.user = token.user as CustomUser
+            return session
 
-          },
-          async jwt({ token, user }) {
-            if(user) {
+        },
+        async jwt({ token, user }) {
+            if (user) {
                 token.user = user
             }
             return token
-          }
+        }
     },
-    providers:[
+    providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
             authorization: {
                 params: {
-                  prompt: "consent",
-                  access_type: "offline",
-                  response_type: "code"
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code"
                 }
-              }
-          })
+            }
+        })
     ]
 }
