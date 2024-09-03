@@ -1,0 +1,10 @@
+DELETE http://localhost:8000/api/chat-group/030f91e8-df7d-4d8a-ba37-dfce1cb0cd05
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmFodWwgamFuZ2lyIiwiZW1haWwiOiJyYWh1bGphbmdpcjEzOUBnbWFpbC5jb20iLCJpZCI6MiwiaWF0IjoxNzI1MzQ3MTQ5LCJleHAiOjE3NTY4ODMxNDl9.Zlooxr8_2ff0VAyTzO0imoStLr1R1S5B-Y88Cmg9RK4
+
+// {
+//     "id": "030f91e8-df7d-4d8a-ba37-dfce1cb0cd05",
+// }
+
+// 687f6e36-3f72-4c2e-91e3-4f59497d6d7d
+// 36f9c6c6-27c5-4780-a42e-99f4fd4573ff
