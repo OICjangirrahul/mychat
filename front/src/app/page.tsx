@@ -6,8 +6,11 @@ import Footer from "@/components/base/Footer";
 // import { authOptions, CustomSession } from "./api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { authOptions, CustomSession } from "./api/auth/[...nextauth]/options";
+import { fetchChatGroup} from  "@/fetch/groupFetch"
+
 export default async function LandingPage() {
   const session: CustomSession | null = await getServerSession(authOptions);
+  const groups = await fetchChatGroup(session?.user?.token!)
   return (
 
     <div className="min-h-screen flex flex-col ">
